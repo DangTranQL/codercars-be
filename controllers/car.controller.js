@@ -11,11 +11,11 @@ carController.createCar = async (req, res, next) => {
 			throw exception;
 		}
 
-		const newCar = await Car.create({make , model, release_date, transmission_type, size, style, price}).save();
+		const newCar = await Car.create({make , model, release_date, transmission_type, size, style, price});
 
 		const response = {message: "Create Car Successfully!", car: newCar}
 
-		res.status(200).send(response)
+		res.status(200).send({data: response})
 	} catch (err) {
 		// YOUR CODE HERE
 		next(err);
@@ -48,7 +48,7 @@ carController.getCars = async (req, res, next) => {
 			cars: allCars,
 		}
 
-		res.status(200).send(response)
+		res.status(200).send({data: response})
 	} catch (err) {
 		// YOUR CODE HERE
 		next(err);
@@ -64,7 +64,7 @@ carController.editCar = async (req, res, next) => {
 		let updatedCar = await Car.findByIdAndUpdate(id,{...updates},{new: true}); //returns the document
 		const response = {message: "Update Car Successfully!", car: updatedCar}
 
-		res.status(200).send(response)
+		res.status(200).send({data: response})
 	} catch (err) {
 		// YOUR CODE HERE
 		next(err);
@@ -79,7 +79,7 @@ carController.deleteCar = async (req, res, next) => {
 		let deletedCar = await Car.findByIdAndUpdate(id,{isDeleted: true},{new: true})
 		const response = { message: "Delete car successfully!", car : deletedCar}
 
-		res.status(200).send(response)
+		res.status(200).send({data: response})
 	} catch (err) {
 		// YOUR CODE HERE
 		next(err);
